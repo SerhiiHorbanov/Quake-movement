@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PlayerGroundCheck : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isOnGround { get; private set; } = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private void OnTriggerEnter()
+        => isOnGround = true;
+
+    private void OnTriggerExit()
+        => isOnGround = false;
 }
