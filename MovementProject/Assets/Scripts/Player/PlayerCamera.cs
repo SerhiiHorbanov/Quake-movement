@@ -11,9 +11,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        float rotateX = UnityEngine.Input.GetAxis("Mouse X") * sensitivity;
-        float rotateY = UnityEngine.Input.GetAxis("Mouse Y") * sensitivity;
-        Debug.Log($"x = {rotateX}, y = {rotateY}");
+        float rotateX = Input.GetAxis("Mouse X") * sensitivity;
+        float rotateY = Input.GetAxis("Mouse Y") * sensitivity;
 
         cameraTransform.localRotation = Quaternion.Euler(cameraTransform.localRotation.eulerAngles.x - rotateY, 0, 0);
 

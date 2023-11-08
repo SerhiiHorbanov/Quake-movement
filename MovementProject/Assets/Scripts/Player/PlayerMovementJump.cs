@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class PlayerMovementJump : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] PlayerGroundCheck groundCheck;
+    [SerializeField] Rigidbody rigidBody;
+
+    [SerializeField] float jumpSpeed;
+
+    public bool TryJump()
     {
-        
+        if (groundCheck.isOnGround)
+            Jump();
+        return groundCheck.isOnGround;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Jump()
     {
-        
+        Vector3 velocity = rigidBody.velocity;
+
+        rigidBody.velocity = new Vector3(velocity.x, jumpSpeed, velocity.z);
     }
 }
