@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class PlayerGroundCheck : MonoBehaviour
 {
-    public bool isOnGround { get; private set; } = false;
+    public bool isOnGround
+        => collidingWith.Count > 0;
 
-    private void OnTriggerEnter()
-        => isOnGround = true;
+    List<Collider> collidingWith = new List<Collider>();
 
-    private void OnTriggerExit()
-        => isOnGround = false;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!collidingWith.Contains(collision.collider))
+            collidingWith.Add(collision.collider);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collidingWith.Contains(collision.collider))
+            collidingWith.Remove(collision.collider);
+    }
 }
