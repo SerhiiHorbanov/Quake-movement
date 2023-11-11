@@ -55,9 +55,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 400
-  field of view: 120
+  field of view: 110
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -179,7 +179,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8723418500275523742}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 245f9f43347006143abb0324930e706d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 3780365636856512007}
   rigidBody: {fileID: 1876707000}
-  jumpSpeed: 4
+  jumpSpeed: 6
 --- !u!114 &1876707002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,9 +257,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20eea9ac27153b24ebb9741551d43d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
-  maxAccel: 1
-  frictionMultiplier: 0.9
+  maxSpeed: 6
+  maxAirSpeed: 3
+  maxAccel: 2.5
+  frictionMultiplier: 0.8
   rigidBody: {fileID: 1876707000}
   groundCheck: {fileID: 3780365636856512007}
 --- !u!114 &3780365636856512007
