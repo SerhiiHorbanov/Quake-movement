@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerMovementJump jump;
     [SerializeField] PlayerMovementWalk walk;
+    [SerializeField] PlayerMovementDash dash;
+    [SerializeField] DashAccelerationChangeTypes type;
 
     void FixedUpdate()
     {
@@ -22,6 +24,11 @@ public class PlayerController : MonoBehaviour
         if (walkDirection.magnitude != 0)
         {
             walk.Walk(walkDirection);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            dash.TryStartDash2D(walkDirection.magnitude > 0.1? walkDirection : new Vector2(transform.forward.x, transform.forward.z), type);
         }
     }
 }
