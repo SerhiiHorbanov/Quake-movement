@@ -6,8 +6,13 @@ public class PlayerMovementDash : MonoBehaviour
 {
     [SerializeField] private int dashFramesCount;
 
-    [SerializeField] private float dashAccelerationIncrease = 1.1f;
-    [SerializeField] private float startingDashAcceleration = 0.1f;
+    [SerializeField] private float startingDashAcceleration;
+    [Header("acceleration increase")]
+    [SerializeField] private float dashAccelerationIncrease;
+    [SerializeField] private DashAccelerationChangeTypes commonDashType;
+    [Header("end action")]
+    [SerializeField] private float endActionValue;
+    [SerializeField] private DashAccelerationChangeTypes commonDashEndActionType;
 
     [SerializeField] Rigidbody rigidBody;
 
@@ -27,34 +32,28 @@ public class PlayerMovementDash : MonoBehaviour
         {
             if (currentDashes[i].IsEnded)
             {
+                currentDashes[i].EndDashAction(rigidBody);
+                Debug.Log($"removing dash at index{i}");
                 currentDashes.RemoveAt(i);
                 i--;
             }
 
             else
+            {
                 currentDashes[i].ApplyDash(rigidBody);
+                Debug.Log($"applyed dash with index {i}");
+            }
         }
     }
 
-    public void TryStartDash2D(Vector2 direction, DashAccelerationChangeTypes dashType)
+    public void TryStartDash(Vector3 direction)
     {
-        StartDash2D(direction, dashType);
+        Velocity = new Vector3(0, 0, 0);
+        StartDash(new Dash(startingDashAcceleration, dashAccelerationIncrease, dashFramesCount, direction, commonDashType, commonDashEndActionType, endActionValue));
     }
 
-    private void StartDash2D(Vector2 direction, DashAccelerationChangeTypes dashType)
+    private void StartDash(Dash dash)
     {
-        Vector3 direction3D = new Vector3(direction.x, 0, direction.y);
-
-        currentDashes.Add(new Dash(startingDashAcceleration, dashAccelerationIncrease, dashFramesCount, direction3D, dashType));
-    }
-    
-    public void TryStartDash3D(Vector3 direction)
-    {
-
-    }
-
-    private void StartDash3D(Vector3 direction)
-    {
-
+        currentDashes.Add(dash);
     }
 }

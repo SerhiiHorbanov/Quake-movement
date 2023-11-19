@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum DashAccelerationChangeTypes//dash acceleration change types
 {
-    exponential,
-    linear,
-    constant,
+    exponential,//accelerationChange *= value
+    linear,//accelerationChange += value
+    constant,//accelerationChange = value
 }

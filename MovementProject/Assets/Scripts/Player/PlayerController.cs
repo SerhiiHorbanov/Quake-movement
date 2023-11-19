@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerMovementJump jump;
     [SerializeField] PlayerMovementWalk walk;
     [SerializeField] PlayerMovementDash dash;
-    [SerializeField] DashAccelerationChangeTypes type;
 
     void FixedUpdate()
     {
@@ -21,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
         walkDirection = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.back) * walkDirection;
 
+        Vector3 walkDirection3D = new Vector3(walkDirection.x, 0, walkDirection.y);
+
         if (walkDirection.magnitude != 0)
         {
             walk.Walk(walkDirection);
@@ -28,7 +29,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            dash.TryStartDash2D(walkDirection.magnitude > 0.1? walkDirection : new Vector2(transform.forward.x, transform.forward.z), type);
+            Vector3 LookDirection2D = new Vector3(transform.forward.x, 0, transform.forward.z);
+            dash.TryStartDash(walkDirection.magnitude > 0.1 ? walkDirection3D : LookDirection2D);
         }
     }
 }

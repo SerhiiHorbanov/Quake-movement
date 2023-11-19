@@ -9,17 +9,21 @@ public class Dash
     public int dashFramesLeft { get; private set; }
     public Vector3 dashDirection { get; private set; }
     public DashAccelerationChangeTypes type { get; private set; }
+    public DashAccelerationChangeTypes endActionType { get; private set; }
+    public float endActionValue { get; private set; }
 
     public bool IsEnded
         => dashFramesLeft <= 0;
 
-    public Dash(float startDashAcceleration, float dashAccelerationIncrease, int dashFrames, Vector3 dashDirection, DashAccelerationChangeTypes type)
+    public Dash(float currentDashAcceleration, float dashAccelerationIncrease, int dashFramesLeft, Vector3 dashDirection, DashAccelerationChangeTypes type, DashAccelerationChangeTypes endActionType, float endActionValue)
     {
-        currentDashAcceleration = startDashAcceleration;
-        dashFramesLeft = dashFrames;
+        this.currentDashAcceleration = currentDashAcceleration;
         this.dashAccelerationIncrease = dashAccelerationIncrease;
+        this.dashFramesLeft = dashFramesLeft;
         this.dashDirection = dashDirection;
         this.type = type;
+        this.endActionType = endActionType;
+        this.endActionValue = endActionValue;
     }
 
     public void ApplyDash(Rigidbody rigidBody)
@@ -33,11 +37,34 @@ public class Dash
                 currentDashAcceleration += dashAccelerationIncrease;
                 break;
         }
-        
-        Debug.Log(dashDirection * currentDashAcceleration);
+
+        Vector2 HorizontalVelocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.z);
+        Vector2 HorizontaldashDirection = new Vector2(dashDirection.x, dashDirection.z);
+
+        if (Vector2.Dot(HorizontalVelocity, HorizontaldashDirection) < 0)
+            rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
 
         rigidBody.velocity += (dashDirection * currentDashAcceleration);
+
         dashFramesLeft -= 1;
         return;
+    }
+
+    public void EndDashAction(Rigidbody rigidBody)
+    {
+        Vector3 vector = dashDirection * endActionValue;
+        switch (endActionType)
+        {
+            case DashAccelerationChangeTypes.constant:
+                rigidBody.velocity = vector;
+                break;
+            case DashAccelerationChangeTypes.linear:
+                rigidBody.velocity += vector;
+                break;
+            case DashAccelerationChangeTypes.exponential:
+                rigidBody.velocity = new Vector3(rigidBody.velocity.x * endActionValue, rigidBody.velocity.y, rigidBody.velocity.z * endActionValue);
+                break;
+
+        }
     }
 }

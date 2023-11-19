@@ -888,32 +888,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812039071}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1876706994 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8723418500275523742, guid: a16f0995c13bc1142b9f35b7844b66e4, type: 3}
-  m_PrefabInstance: {fileID: 8723418499740997164}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1876706995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876706994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3218c4d96eba454bac43a276cabfac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashFramesCount: 10
-  dashAccelerationIncrease: 1.01
-  startingDashAcceleration: 1
-  rigidBody: {fileID: 1876707000}
---- !u!54 &1876707000 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 1876707000, guid: a16f0995c13bc1142b9f35b7844b66e4, type: 3}
-  m_PrefabInstance: {fileID: 8723418499740997164}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8723418499740997164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -921,14 +895,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1876707002, guid: a16f0995c13bc1142b9f35b7844b66e4, type: 3}
-      propertyPath: dash
-      value: 
-      objectReference: {fileID: 1876706995}
-    - target: {fileID: 1876707002, guid: a16f0995c13bc1142b9f35b7844b66e4, type: 3}
-      propertyPath: type
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8723418500275523738, guid: a16f0995c13bc1142b9f35b7844b66e4, type: 3}
       propertyPath: m_RootOrder
       value: 2

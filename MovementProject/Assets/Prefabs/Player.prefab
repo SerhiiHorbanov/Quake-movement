@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 1876707002}
   - component: {fileID: 552488823781641012}
   - component: {fileID: 3780365636856512007}
+  - component: {fileID: 1876706995}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -245,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump: {fileID: 1876707001}
   walk: {fileID: 552488823781641012}
+  dash: {fileID: 1876706995}
 --- !u!114 &552488823781641012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,3 +277,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8f432dc7214d041aa3ee2327fed963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1876706995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723418500275523742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3218c4d96eba454bac43a276cabfac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashFramesCount: 10
+  startingDashAcceleration: 5
+  dashAccelerationIncrease: 0.8
+  commonDashType: 0
+  endActionValue: 0.6
+  commonDashEndActionType: 0
+  rigidBody: {fileID: 1876707000}
