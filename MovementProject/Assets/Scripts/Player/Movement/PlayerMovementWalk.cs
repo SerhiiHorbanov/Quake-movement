@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class PlayerMovementWalk : MonoBehaviour
 {
+    [Header("speeds")]
+
+    [Tooltip("max speed on ground. for better understanding check code")]
     [SerializeField] float maxSpeed;
+
+    [Tooltip("max speed in air. for better understanding check code")]
     [SerializeField] float maxAirSpeed;
+
+    [Header("other")]
+
+    [Tooltip("max change of speed that can be applied to velocity per FixedUpdate frame")]
     [SerializeField] float maxAccel;
+
+    [Tooltip("player horizontal velocity multiplies by frictionMultiplier every FixedUpdate frame when groundCheck.isOnGround is true")]
     [SerializeField] float frictionMultiplier;
 
     [SerializeField] Rigidbody rigidBody;
