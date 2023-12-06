@@ -1,40 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using Player.Movement;
+using Player.Movement.Dash;
 
-public class PlayerController : MonoBehaviour
+namespace Player
 {
-    [SerializeField] PlayerMovementJump jump;
-    [SerializeField] PlayerMovementWalk walk;
-    [SerializeField] PlayerMovementDash dash;
-    [SerializeField] PlayerCamera look;
-
-    Vector2 walkDirection = Vector2.zero;
-    public void ChangeWalkDirection(InputAction.CallbackContext context)
+    public class PlayerController : MonoBehaviour
     {
-        walkDirection = context.ReadValue<Vector2>();
-    }
+        [SerializeField] PlayerMovementJump jump;
+        [SerializeField] PlayerMovementWalk walk;
+        [SerializeField] PlayerMovementDash dash;
+        [SerializeField] PlayerCamera look;
 
-    private void FixedUpdate()
-    {
-        walk.SetRelativeWalkDirection(walkDirection);
-    }
+        Vector2 walkDirection = Vector2.zero;
+        public void ChangeWalkDirection(InputAction.CallbackContext context)
+        {
+            walkDirection = context.ReadValue<Vector2>();
+        }
 
-    public void TryStartDash(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-            dash.TryStartCommonDash();
-    }
+        private void FixedUpdate()
+        {
+            walk.SetRelativeWalkDirection(walkDirection);
+        }
 
-    public void TryStartJump(InputAction.CallbackContext context)
-    {
-        jump.isJumping = context.phase.IsInProgress();
-    }
+        public void TryStartDash(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Started)
+                dash.TryStartCommonDash();
+        }
 
-    public void RotateLook(InputAction.CallbackContext context)
-    {
-        look.RotateLook(context.ReadValue<Vector2>());
+        public void TryStartJump(InputAction.CallbackContext context)
+        {
+            jump.isJumping = context.phase.IsInProgress();
+        }
+
+        public void RotateLook(InputAction.CallbackContext context)
+        {
+            look.RotateLook(context.ReadValue<Vector2>());
+        }
     }
 }

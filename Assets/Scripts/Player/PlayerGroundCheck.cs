@@ -1,23 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundCheck : MonoBehaviour
+namespace Player
 {
-    public bool isOnGround
-        => collidingWith.Count > 0;
-
-    List<Collider> collidingWith = new List<Collider>();
-
-    private void OnCollisionEnter(Collision collision)
+    public class PlayerGroundCheck : MonoBehaviour
     {
-        if (!collidingWith.Contains(collision.collider))
-            collidingWith.Add(collision.collider);
-    }
+        public bool isOnGround
+            => collidingWith.Count > 0;
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collidingWith.Contains(collision.collider))
-            collidingWith.Remove(collision.collider);
+        List<Collider> collidingWith = new List<Collider>();
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!collidingWith.Contains(collision.collider))
+                collidingWith.Add(collision.collider);
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collidingWith.Contains(collision.collider))
+                collidingWith.Remove(collision.collider);
+        }
     }
 }

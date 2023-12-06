@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PlayerCamera : MonoBehaviour
+namespace Player
 {
-    [SerializeField] Transform cameraTransform;
-
-    [SerializeField] float sensitivity;
-
-    public void RotateLook(Vector2 delta)
+    public class PlayerCamera : MonoBehaviour
     {
-        delta *= sensitivity;
+        [SerializeField] Transform cameraTransform;
 
-        cameraTransform.localRotation = Quaternion.Euler(cameraTransform.localRotation.eulerAngles.x - delta.y, 0, 0);
+        [SerializeField] float sensitivity;
 
-        transform.Rotate(0, delta.x, 0);
+        public void RotateLook(Vector2 delta)
+        {
+            delta *= sensitivity;
+
+            cameraTransform.localRotation = Quaternion.Euler(cameraTransform.localRotation.eulerAngles.x - delta.y, 0, 0);
+
+            transform.Rotate(0, delta.x, 0);
+        }
     }
 }

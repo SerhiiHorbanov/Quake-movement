@@ -1,36 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerGroundCheck))]
-[RequireComponent(typeof(Rigidbody))]
-public class PlayerMovementJump : MonoBehaviour
+namespace Player.Movement
 {
-    [SerializeField] PlayerGroundCheck groundCheck;
-    [SerializeField] Rigidbody rigidBody;
-
-    [Tooltip("vertical velocity that will be added to player when initiating jump... i mean just the force of a jump")]
-    [SerializeField] float jumpSpeed;
-
-    public bool isJumping = false;
-
-    private void Update()
+    [RequireComponent(typeof(PlayerGroundCheck))]
+    [RequireComponent(typeof(Rigidbody))]
+    public class PlayerMovementJump : MonoBehaviour
     {
-        if (isJumping)
-            TryJump();
-    }
+        [SerializeField] PlayerGroundCheck groundCheck;
+        [SerializeField] Rigidbody rigidBody;
 
-    public void TryJump()
-    {
-        if (groundCheck.isOnGround)
-            Jump();
-    }
+        [Tooltip("vertical velocity that will be added to player when initiating jump... i mean just the force of a jump")]
+        [SerializeField] float jumpSpeed;
 
-    private void Jump()
-    {
-        Vector3 velocity = rigidBody.velocity;
+        public bool isJumping = false;
 
-        rigidBody.velocity = new Vector3(velocity.x, jumpSpeed, velocity.z);
+        private void Update()
+        {
+            if (isJumping)
+                TryJump();
+        }
+
+        public void TryJump()
+        {
+            if (groundCheck.isOnGround)
+                Jump();
+        }
+
+        private void Jump()
+        {
+            Vector3 velocity = rigidBody.velocity;
+
+            rigidBody.velocity = new Vector3(velocity.x, jumpSpeed, velocity.z);
+        }
     }
 }
