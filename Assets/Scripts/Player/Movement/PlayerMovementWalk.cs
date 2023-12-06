@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovementWalk : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class PlayerMovementWalk : MonoBehaviour
     [SerializeField] PlayerGroundCheck groundCheck;
 
     public Vector2 walkDirection;
-
 
     Vector3 Velocity
     { 
@@ -51,6 +51,17 @@ public class PlayerMovementWalk : MonoBehaviour
         Velocity += additionalVelocity;
     }
 
+    public void SetRelativeWalkDirection(Vector2 relativeWalkDirection)//direction relatively to where the character is facing
+    {
+        Vector2 newWalkDirection = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.back) * relativeWalkDirection;
+        SetAbsoluteWalkDirection(newWalkDirection);
+    }
+
+    public void SetAbsoluteWalkDirection(Vector2 newWalkDirection)
+    {
+        walkDirection = newWalkDirection;
+    }
+
     private void UpdateFriction()
     {
         if (walkDirection.magnitude > 0.01)
@@ -68,7 +79,5 @@ public class PlayerMovementWalk : MonoBehaviour
             UpdateFriction();
 
         UpdateWalking(walkDirection);
-
-        walkDirection = Vector2.zero;
     }
 }

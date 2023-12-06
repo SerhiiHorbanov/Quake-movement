@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovementDash : MonoBehaviour
 {
@@ -54,10 +55,15 @@ public class PlayerMovementDash : MonoBehaviour
         }
     }
 
-    public void TryStartDash(Vector3 direction)
+    /*public void StartCommonDash(InputAction.CallbackContext context)
+        => StartCommonDash(context.ReadValue<Vector2>());*/
+
+    public void TryStartCommonDash()
     {
+        Vector3 lookDirection2D = new Vector3(transform.forward.x, 0, transform.forward.z);
         Velocity = new Vector3(0, 0, 0);
-        StartDash(new Dash(startingDashAcceleration, dashAccelerationIncrease, dashFramesCount, direction, commonDashType, commonDashEndActionType, endActionValue));
+        StartDash(new Dash(startingDashAcceleration, dashAccelerationIncrease, dashFramesCount, lookDirection2D, commonDashType, commonDashEndActionType, endActionValue));
+        Debug.Log("started dash");
     }
 
     private void StartDash(Dash dash)

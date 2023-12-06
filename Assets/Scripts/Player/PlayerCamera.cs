@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -9,13 +10,12 @@ public class PlayerCamera : MonoBehaviour
 
     [SerializeField] float sensitivity;
 
-    private void LateUpdate()
+    public void RotateLook(Vector2 delta)
     {
-        float rotateX = Input.GetAxis("Mouse X") * sensitivity;
-        float rotateY = Input.GetAxis("Mouse Y") * sensitivity;
+        delta *= sensitivity;
 
-        cameraTransform.localRotation = Quaternion.Euler(cameraTransform.localRotation.eulerAngles.x - rotateY, 0, 0);
+        cameraTransform.localRotation = Quaternion.Euler(cameraTransform.localRotation.eulerAngles.x - delta.y, 0, 0);
 
-        transform.Rotate(0, rotateX, 0);
+        transform.Rotate(0, delta.x, 0);
     }
 }

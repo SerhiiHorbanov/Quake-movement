@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -8,29 +9,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerMovementJump jump;
     [SerializeField] PlayerMovementWalk walk;
     [SerializeField] PlayerMovementDash dash;
+    [SerializeField] PlayerCamera look;
 
-    void FixedUpdate()
+    public void ChangeWalkDirection(InputAction.CallbackContext context)
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            jump.TryJump();
-        }
+        walk.SetRelativeWalkDirection(context.ReadValue<Vector2>());
+    }
 
-        Vector2 walkDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    public void TryStartDash(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            dash.TryStartCommonDash();
+    }
 
-        walkDirection = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.back) * walkDirection;
+    public void TryStartJump(InputAction.CallbackContext context)
+    {
+        jump.isJumping = context.phase.IsInProgress();
+    }
 
-        Vector3 walkDirection3D = new Vector3(walkDirection.x, 0, walkDirection.y);
-
-        if (walkDirection.magnitude != 0)
-        {
-            walk.walkDirection = walkDirection;
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Vector3 LookDirection2D = new Vector3(transform.forward.x, 0, transform.forward.z);
-            dash.TryStartDash(walkDirection.magnitude > 0.1 ? walkDirection3D : LookDirection2D);
-        }
+    public void RotateLook(InputAction.CallbackContext context)
+    {
+        look.RotateLook(context.ReadValue<Vector2>());
     }
 }
