@@ -45,16 +45,12 @@ public class PlayerMovementDash : MonoBehaviour
             if (currentDashes[i].IsEnded)
             {
                 currentDashes[i].EndDashAction(rigidBody);
-                Debug.Log($"removing dash at index{i}");
                 currentDashes.RemoveAt(i);
                 i--;
             }
 
             else
-            {
                 currentDashes[i].ApplyDash(rigidBody);
-                Debug.Log($"applyed dash with index {i}");
-            }
         }
     }
 

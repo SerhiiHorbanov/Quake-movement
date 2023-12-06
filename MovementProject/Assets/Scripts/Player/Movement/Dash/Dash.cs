@@ -39,9 +39,9 @@ public class Dash
         }
 
         Vector2 HorizontalVelocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.z);
-        Vector2 HorizontaldashDirection = new Vector2(dashDirection.x, dashDirection.z);
+        Vector2 HorizontalDashDirection = new Vector2(dashDirection.x, dashDirection.z);
 
-        if (Vector2.Dot(HorizontalVelocity, HorizontaldashDirection) < 0)
+        if (Vector2.Dot(HorizontalVelocity, HorizontalDashDirection) < 0)
             rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
 
         rigidBody.velocity += (dashDirection * currentDashAcceleration);

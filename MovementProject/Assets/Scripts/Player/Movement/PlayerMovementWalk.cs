@@ -23,6 +23,9 @@ public class PlayerMovementWalk : MonoBehaviour
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] PlayerGroundCheck groundCheck;
 
+    public Vector2 walkDirection;
+
+
     Vector3 Velocity
     { 
         get 
@@ -31,11 +34,8 @@ public class PlayerMovementWalk : MonoBehaviour
             => rigidBody.velocity = value;
     }
 
-    public void Walk(Vector2 direction)
+    private void UpdateWalking(Vector2 direction)
     {
-        if (groundCheck == null)
-            return;
-
         direction.Normalize();
 
         Vector2 horizontalVelocity = new Vector2(Velocity.x, Velocity.z);
@@ -51,9 +51,24 @@ public class PlayerMovementWalk : MonoBehaviour
         Velocity += additionalVelocity;
     }
 
+    private void UpdateFriction()
+    {
+        if (walkDirection.magnitude > 0.01)
+        {
+            Vector3 lerpingToVector = new Vector3(walkDirection.x, 0, walkDirection.y) * maxSpeed;
+            Velocity = Vector3.Lerp(Velocity, lerpingToVector, frictionMultiplier);
+            return;
+        }
+        Velocity = new Vector3(Velocity.x * frictionMultiplier, Velocity.y, Velocity.z * frictionMultiplier);
+    }
+
     private void FixedUpdate()
     {
         if (groundCheck.isOnGround)
-            Velocity = new Vector3(Velocity.x * frictionMultiplier, Velocity.y, Velocity.z * frictionMultiplier);
+            UpdateFriction();
+
+        UpdateWalking(walkDirection);
+
+        walkDirection = Vector2.zero;
     }
 }

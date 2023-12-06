@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
         if (walkDirection.magnitude != 0)
         {
-            walk.Walk(walkDirection);
+            walk.walkDirection = walkDirection;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
