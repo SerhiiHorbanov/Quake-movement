@@ -11,9 +11,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerMovementDash dash;
     [SerializeField] PlayerCamera look;
 
+    Vector2 walkDirection = Vector2.zero;
     public void ChangeWalkDirection(InputAction.CallbackContext context)
     {
-        walk.SetRelativeWalkDirection(context.ReadValue<Vector2>());
+        walkDirection = context.ReadValue<Vector2>();
+    }
+
+    private void FixedUpdate()
+    {
+        walk.SetRelativeWalkDirection(walkDirection);
     }
 
     public void TryStartDash(InputAction.CallbackContext context)

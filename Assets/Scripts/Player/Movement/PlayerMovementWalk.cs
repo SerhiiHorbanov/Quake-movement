@@ -64,10 +64,11 @@ public class PlayerMovementWalk : MonoBehaviour
 
     private void UpdateFriction()
     {
-        if (walkDirection.magnitude > 0.01)
+        if (walkDirection.magnitude > 0.01f)
         {
             Vector3 lerpingToVector = new Vector3(walkDirection.x, 0, walkDirection.y) * maxSpeed;
-            Velocity = Vector3.Lerp(Velocity, lerpingToVector, frictionMultiplier);
+            Vector3 lerpedVector = Vector3.Lerp(Velocity, lerpingToVector, frictionMultiplier);
+            Velocity = new Vector3(lerpedVector.x, Velocity.y, lerpedVector.z);
             return;
         }
         Velocity = new Vector3(Velocity.x * frictionMultiplier, Velocity.y, Velocity.z * frictionMultiplier);
@@ -77,7 +78,7 @@ public class PlayerMovementWalk : MonoBehaviour
     {
         if (groundCheck.isOnGround)
             UpdateFriction();
-
-        UpdateWalking(walkDirection);
+        if (walkDirection.magnitude > 0.01f)
+            UpdateWalking(walkDirection);
     }
 }
