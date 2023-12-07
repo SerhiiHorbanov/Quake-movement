@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Player.Movement
 {
-    [RequireComponent(typeof(PlayerGroundCheck))]
+    [RequireComponent(typeof(GroundCheck))]
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovementJump : MonoBehaviour
+    public class Jump : MonoBehaviour
     {
-        [SerializeField] PlayerGroundCheck groundCheck;
+        [SerializeField] GroundCheck groundCheck;
         [SerializeField] Rigidbody rigidBody;
 
         [Tooltip("vertical velocity that will be added to player when initiating jump... i mean just the force of a jump")]
@@ -17,16 +17,16 @@ namespace Player.Movement
         private void Update()
         {
             if (isJumping)
-                TryJump();
+                TryStartJump();
         }
 
-        public void TryJump()
+        public void TryStartJump()
         {
             if (groundCheck.isOnGround)
-                Jump();
+                StartJump();
         }
 
-        private void Jump()
+        private void StartJump()
         {
             Vector3 velocity = rigidBody.velocity;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player.Movement.Dash
 {
-    public class PlayerMovementDash : MonoBehaviour
+    public class DashManager : MonoBehaviour
     {
         [Tooltip("how many FixedUpdate frames common dashes will last")]
         [SerializeField] private int dashFramesCount;
@@ -63,7 +63,6 @@ namespace Player.Movement.Dash
             Vector3 lookDirection2D = new Vector3(transform.forward.x, 0, transform.forward.z);
             Velocity = new Vector3(0, 0, 0);
             StartDash(new Dash(startingDashAcceleration, dashAccelerationIncrease, dashFramesCount, lookDirection2D, commonDashType, commonDashEndActionType, endActionValue));
-            Debug.Log("started dash");
         }
 
         private void StartDash(Dash dash)

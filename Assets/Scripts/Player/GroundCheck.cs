@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerGroundCheck : MonoBehaviour
+    public class GroundCheck : MonoBehaviour
     {
         public bool isOnGround
             => collidingWith.Count > 0;

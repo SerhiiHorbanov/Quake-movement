@@ -7,9 +7,9 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] PlayerMovementJump jump;
-        [SerializeField] PlayerMovementWalk walk;
-        [SerializeField] PlayerMovementDash dash;
+        [SerializeField] Jump jump;
+        [SerializeField] Walk walk;
+        [SerializeField] DashManager dash;
         [SerializeField] PlayerCamera look;
 
         Vector2 walkDirection = Vector2.zero;

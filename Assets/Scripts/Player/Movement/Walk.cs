@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Player.Movement
 {
-    public class PlayerMovementWalk : MonoBehaviour
+    public class Walk : MonoBehaviour
     {
         [Header("speeds")]
 
@@ -21,7 +21,7 @@ namespace Player.Movement
         [SerializeField] float frictionMultiplier;
 
         [SerializeField] Rigidbody rigidBody;
-        [SerializeField] PlayerGroundCheck groundCheck;
+        [SerializeField] GroundCheck groundCheck;
 
         public Vector2 walkDirection;
 
