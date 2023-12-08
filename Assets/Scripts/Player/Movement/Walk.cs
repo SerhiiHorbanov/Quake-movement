@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace Player.Movement
 {
+    [RequireComponent(typeof(GroundCheck))]
+    [RequireComponent(typeof(Rigidbody))]
     public class Walk : MonoBehaviour
     {
         [Header("speeds")]
@@ -75,6 +77,9 @@ namespace Player.Movement
 
         private void FixedUpdate()
         {
+            Vector2 horizontalVelocity = new Vector2(Velocity.x, Velocity.z);
+
+            Debug.Log($"horizontal speed = {horizontalVelocity.magnitude}");
             if (groundCheck.isOnGround)
                 UpdateFriction();
             if (walkDirection.magnitude > 0.01f)

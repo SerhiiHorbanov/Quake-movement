@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Player.Movement.Dash
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class DashManager : MonoBehaviour
     {
         [Tooltip("how many FixedUpdate frames common dashes will last")]
@@ -54,9 +55,6 @@ namespace Player.Movement.Dash
                     currentDashes[i].ApplyDash(rigidBody);
             }
         }
-
-        /*public void StartCommonDash(InputAction.CallbackContext context)
-            => StartCommonDash(context.ReadValue<Vector2>());*/
 
         public void TryStartCommonDash()
         {

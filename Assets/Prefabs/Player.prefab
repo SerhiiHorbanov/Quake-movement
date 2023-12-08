@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 6
   maxAirSpeed: 3
-  maxAccel: 2.5
+  maxAccel: 2
   frictionMultiplier: 0.8
   rigidBody: {fileID: 1876707000}
   groundCheck: {fileID: 3780365636856512007}

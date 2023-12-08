@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
+    [RequireComponent(typeof(Collider))]
     public class GroundCheck : MonoBehaviour
     {
         public bool isOnGround
