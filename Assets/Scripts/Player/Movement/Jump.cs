@@ -36,9 +36,8 @@ namespace Player.Movement
 
         private void StartJump()
         {
-            Vector3 velocity = rigidBody.velocity;
-
-            rigidBody.velocity = new Vector3(velocity.x, jumpSpeed, velocity.z);
+            if (Velocity.y < jumpSpeed)
+                Velocity = new Vector3(Velocity.x, jumpSpeed, Velocity.z);
         }
     }
 }
