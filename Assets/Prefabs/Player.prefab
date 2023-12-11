@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8f432dc7214d041aa3ee2327fed963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coyoteTimeFrames: 10
 --- !u!114 &1876706995
 MonoBehaviour:
   m_ObjectHideFlags: 0

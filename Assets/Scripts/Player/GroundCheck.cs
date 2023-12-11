@@ -7,9 +7,26 @@ namespace Player
     public class GroundCheck : MonoBehaviour
     {
         public bool isOnGround
-            => collidingWith.Count > 0;
+            => framesOffGround <= coyoteTimeFrames;
+
+        [Tooltip("how many frames off ground player has to be to for isOnGround be false")]
+        [SerializeField] private int coyoteTimeFrames;
+        private int framesOffGround = 0;
 
         List<Collider> collidingWith = new List<Collider>();
+
+        void FixedUpdate()
+        {
+            Debug.Log($"framesOffGround = {framesOffGround}");
+
+            if (collidingWith.Count > 0)//if colliding with anything
+            {
+                framesOffGround = 0;
+                return;
+            }
+
+            framesOffGround++;
+        }
 
         private void OnCollisionEnter(Collision collision)
         {

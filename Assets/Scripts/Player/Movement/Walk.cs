@@ -65,13 +65,6 @@ namespace Player.Movement
 
         private void UpdateFriction()
         {
-            if (walkDirection.magnitude > 0.01f)
-            {
-                Vector3 lerpingToVector = new Vector3(walkDirection.x, 0, walkDirection.y) * maxSpeed;
-                Vector3 lerpedVector = Vector3.Lerp(Velocity, lerpingToVector, frictionMultiplier);
-                Velocity = new Vector3(lerpedVector.x, Velocity.y, lerpedVector.z);
-                return;
-            }
             Velocity = new Vector3(Velocity.x * frictionMultiplier, Velocity.y, Velocity.z * frictionMultiplier);
         }
 
@@ -79,7 +72,6 @@ namespace Player.Movement
         {
             Vector2 horizontalVelocity = new Vector2(Velocity.x, Velocity.z);
 
-            Debug.Log($"horizontal speed = {horizontalVelocity.magnitude}");
             if (groundCheck.isOnGround)
                 UpdateFriction();
             if (walkDirection.magnitude > 0.01f)
