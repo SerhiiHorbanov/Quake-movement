@@ -56,11 +56,24 @@ namespace Player.Movement.Dash
             }
         }
 
-        public void TryStartCommonDash()
+        public void TryStartCommonDash(Vector2 direction)
         {
-            Vector3 lookDirection2D = new Vector3(transform.forward.x, 0, transform.forward.z);
+            if (direction.magnitude < 0.1f)
+                direction = new Vector2(transform.forward.x, transform.forward.z);
+
+            Debug.Log($"direction = {direction}");
+
+            direction = Quaternion.Euler(0, 0, transform.rotation.y) * direction;
+
+            Debug.Log($"direction = {direction}");
+
+            Vector3 direction3D = new Vector3(direction.x, 0, direction.y);
+
+            Debug.Log($"direction3D = {direction3D}");
+
             Velocity = new Vector3(0, 0, 0);
-            StartDash(new Dash(startingDashAcceleration, dashAccelerationIncrease, dashFramesCount, lookDirection2D, commonDashType, commonDashEndActionType, endActionValue));
+
+            StartDash(new Dash(startingDashAcceleration, dashAccelerationIncrease, dashFramesCount, direction3D, commonDashType, commonDashEndActionType, endActionValue));
         }
 
         private void StartDash(Dash dash)

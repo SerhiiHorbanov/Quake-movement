@@ -26,7 +26,7 @@ namespace Player
         public void TryStartDash(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Started)
-                dash.TryStartCommonDash();
+                dash.TryStartCommonDash(walk.walkDirection);
         }
 
         public void TryStartJump(InputAction.CallbackContext context)
