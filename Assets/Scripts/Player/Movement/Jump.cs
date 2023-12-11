@@ -14,6 +14,14 @@ namespace Player.Movement
 
         public bool isJumping = false;
 
+        Vector3 Velocity
+        {
+            get
+                => rigidBody.velocity;
+            set
+                => rigidBody.velocity = value;
+        }
+
         private void Update()
         {
             if (isJumping)
@@ -22,7 +30,7 @@ namespace Player.Movement
 
         public void TryStartJump()
         {
-            if (groundCheck.isOnGround)
+            if (groundCheck.isOnGroundWithCoyoteTime)
                 StartJump();
         }
 

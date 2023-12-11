@@ -7,6 +7,8 @@ namespace Player
     public class GroundCheck : MonoBehaviour
     {
         public bool isOnGround
+            => framesOffGround == 0;
+        public bool isOnGroundWithCoyoteTime
             => framesOffGround <= coyoteTimeFrames;
 
         [Tooltip("how many frames off ground player has to be to for isOnGround be false")]
@@ -17,8 +19,6 @@ namespace Player
 
         void FixedUpdate()
         {
-            Debug.Log($"framesOffGround = {framesOffGround}");
-
             if (collidingWith.Count > 0)//if colliding with anything
             {
                 framesOffGround = 0;
