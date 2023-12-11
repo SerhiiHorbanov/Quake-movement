@@ -61,15 +61,9 @@ namespace Player.Movement.Dash
             if (direction.magnitude < 0.1f)
                 direction = new Vector2(transform.forward.x, transform.forward.z);
 
-            Debug.Log($"direction = {direction}");
-
             direction = Quaternion.Euler(0, 0, transform.rotation.y) * direction;
 
-            Debug.Log($"direction = {direction}");
-
             Vector3 direction3D = new Vector3(direction.x, 0, direction.y);
-
-            Debug.Log($"direction3D = {direction3D}");
 
             Velocity = new Vector3(0, 0, 0);
 
